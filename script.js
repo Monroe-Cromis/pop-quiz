@@ -1,107 +1,46 @@
-// create variables 
-var questions [{ question: "q1", answers: ["a1", "a2"], correctAnswer: "a1"}];
-var currentQuestion = 0;
+const startButton = document.getElementById('start-btn')
+startButton.addEventListener('click', startQuiz)
+
+const questionContainerElement = document.getElementById('question-container')
+
+let shuffledQuestions, currentQuestionIndex
+
+const questionElement = document.getElementById('question')
+const answerButtonsElement = document.getElementById('answer-buttons')
+//start quiz
 
 
-//set which answers are right and wrong 
-function init(event) {
-    // .textContent set questions and ansers 
+function startQuiz(){
+    console.log('started')
+    startButton.classList.add('hide')
+    //shuffles questions 
+    shuffledQuestions =questions.sort(()=>Math.random()-.5)
+    currentQuestionIndex= 0
+    questionContainerElement.classList.remove(hide)
+    setNextQuestion()
 }
-
-function validate(event) {
-    // checks if answer is answer is correctAnswer
-    console.log(event.target);
-    // do logic to see if right answer 
-    // update score
-
-    // at the end after that
-    generateNextQuestion();
-}
-
-function generateNextQuestion() {
-    currentQuestion += 1;
-    // .textContent set questions and ansers 
-}
-
-
-
-setInterval(function()){
-
-
-
+//what happens when you click on the next button 
+function setNextQuestion(){
+    showQuestion(shuffledQuestions[currentQuestionIndex])
 
 }
 
+function showQuestion(question){
+questionElement.innerText= question.question
 
 
-
-
-// submit answer button
-var submitButton = document.querySelector("#submitButton");
-submitButton.addEventListener("click", validate);
-// startgame
-var myButton = document.querySelector("#myButton");
-
-myButton.addEventListener("click", init);
-
-var questions [ {question: "q1", answers: ["a1", "a2"], correctAnswer: 1}];
-var currentQuestion = 0;
-
-
-
-function init(event) {
-  // .textContent set questions and ansers 
 }
 
-function validate(event) {
-  // checks if answer is answer is correctAnswer
-  console.log(event.target);
-  // do logic to see if right answer 
-    // update score
 
-    // at the end after that
-    generateNextQuestion();
+//select answer
+function selectAnswer(){
+
+
 }
 
-function generateNextQuestion() {
-  currentQuestion += 1;
-    // .textContent set questions and ansers 
-}
-
-// submit answer button
-var submitButton = document.querySelector("#submitButton");
-submitButton.addEventListener("click", validate);
-// startgame
-var myButton = document.querySelector("#myButton");
-
-myButton.addEventListener("click", init);
-
-
-
-//adding timer 
-// Timer that counts down from 5
-function countdown() {
-    var timeLeft = 5;
-  
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function () {
-      // As long as the `timeLeft` is greater than 1
-      if (timeLeft > 1) {
-        // Set the `textContent` of `timerEl` to show the remaining seconds
-        timerEl.textContent = timeLeft + ' seconds remaining';
-        // Decrement `timeLeft` by 1
-        timeLeft--;
-      } else if (timeLeft === 1) {
-        // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-        timerEl.textContent = timeLeft + ' second remaining';
-        timeLeft--;
-      } else {
-        // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-        timerEl.textContent = '';
-        // Use `clearInterval()` to stop the timer
-        clearInterval(timeInterval);
-        // Call the `displayMessage()` function
-        displayMessage();
-      }
-    }, 1000);
-  }
+const questions= [
+    {question:"What is CSS?",
+    answers:[
+        {text: 'Cascading Style Sheets', correct:true},
+        {text: 'Catsmaking Stylish Shoes',  correct:false }]
+    }]
